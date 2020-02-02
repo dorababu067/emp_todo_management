@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row mx-auto">
+  <!-- Add tasks -->
+  <div class="container col-md-3 mt-3 mx-auto">
+    <div class="card">
+      <div class="card-header font-weight-bold text-center text-primary">Create your task</div>
+      <div class="card-body">
+        {% include 'messages.html' %}
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- todo-task list -->
+  <div class="col-md-9 mt-3 mx-auto">
+    <div class="card">
+      <div class="card-header font-weight-bold text-center text-info">Employee Tasks list</div>
+      <div class="card-body">
+      <table class="table table-sm">
+        <thead class="table-dark text-center">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Time</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+          {% for task in tasks %}
+          <tbody>
+            <tr>
+              <td scope="row">{{ task.title }}</td>
+              <td scope="row">{{ task.description }}</td>
+              <td scope="row">{{ task.spent_time }}</td>
+              <td scope="row">
+                <a href="{% url 'task_update' task.ts_id %}" class="btn-success">
+                  <span class="glyphicon glyphicon-trash">Edit</span>
+                </a>
+              </td>
+              <td scope="row"><a href="{% url 'task_delete' task.ts_id %}" class="btn-danger">Delete</td>
+            </tr>
+          {% empty %}
+          <td>
+            <p class="alert alert-info text-center">No Tasks available</p>
+          </td>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

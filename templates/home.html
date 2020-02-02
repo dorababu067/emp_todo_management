@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="jumbotron col-md-8 mt-3 border border-primary rounded mx-auto">
+        {% if request.session.user.login %}
+                <h1>Welcome {{ username | capfirst }}</h1>
+        {% else %}
+                <h1>Welcome Anonymus User</h1>
+        {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="row mx-auto">
+  <!-- upadate task tasks -->
+  <div class="container col-md-5 mt-3 mx-auto">
+    <div class="card border border-info">
+      <div class="card-header font-weight-bold text-center text-primary border border-info">Update your task</div>
+      <div class="card-body">
+        {% include 'messages.html' %}
+        <form action="{ url 'task_update' }" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <br>
+          <button type="submit" class="btn btn-info">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
